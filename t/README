@@ -1,0 +1,38 @@
+Basic steps to run the tests can be found in the HACKING file one
+directory up from where this file is location; this file merely documents
+additional information about the tests and what is needed to run them.
+
+This directory holds many test scripts for EasyGit.  Almost all of
+these tests were taken from git.git, and are run by making a symlink
+called 'git' to eg and putting this 'git' in the front of the path[*].
+By doing this, most tests from git.git are used completely unmodified,
+while nearly all others just need slight tweaks to the parameters due
+to the different defaults of git and eg.
+
+[*] Note that eg does call through to git for most of its functionality,
+but it modifies $ENV{PATH} to avoid calling itself recursively.
+
+The infrastructure behind these tests is described in detail in the
+README-git.git file, which is merely a copy of the t/README file from
+git.git.
+
+=== Requirements: ===
+
+* You need the test-* binaries built from a git.git clone or tarball
+
+  git.git has a couple special-purpose executables used solely for
+  testing that are built with git but not installed with it.  The eg
+  testsuite also needs these binaries, but does not provide the source
+  code.  You'll need to build git, and stick the directory containting
+  these test-* binaries (the toplevel directory of the git clone) in
+  the front of your path.  This is also a good way to get a new enough
+  version of git.
+
+* You need a matching git version to pass the tests.
+
+  Since eg just calls through to git for most of its behavior, and this
+  test directory contains the comprehensive testsuite from git.git, you
+  need a version of git with all the appropriate features and bugfixes
+  to pass the tests.  Just take the version of eg, stripping any '.dev'
+  from it, and that's the version of git that you need to test with.
+
